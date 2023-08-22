@@ -44,11 +44,8 @@ public class NoticiaControllerRestful {
 	@ResponseStatus(HttpStatus.OK)
 	public void actualizar(@RequestBody NoticiaTO noticia, @PathVariable String tituloCorto) {
 		NoticiaTO noti = this.noticiaService.buscar(tituloCorto);
-		noti.setTituloLargo(noticia.getTituloLargo());
-		noti.setTituloCorto(noticia.getTituloCorto());
-		noti.setDescripcion(noticia.getDescripcion());
-		noti.setFecha(noticia.getFecha());
-		this.noticiaService.actualizar(noti);
+		noticia.setId(noti.getId());
+		this.noticiaService.actualizar(noticia);
 	}
 
 	@DeleteMapping(path = "{tituloCorto}")
@@ -62,10 +59,9 @@ public class NoticiaControllerRestful {
 		return ResponseEntity.status(HttpStatus.OK).body(this.noticiaService.consultaPorCedulaEst(cedula));
 	}
 
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<NoticiaTO>> consultarTodos() {
 		return ResponseEntity.status(HttpStatus.OK).body(this.noticiaService.consultarTodos());
-
 	}
 
 }
