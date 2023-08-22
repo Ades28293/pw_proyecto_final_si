@@ -1,5 +1,7 @@
 package com.programacion.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.programacion.service.IComentarioService;
 import com.programacion.service.IForoService;
+import com.programacion.service.to.ComentarioTO;
 import com.programacion.service.to.ForoTO;
 
 @RestController
@@ -25,6 +29,9 @@ public class ForoControllerRestFul {
 
 	@Autowired
 	private IForoService foroService;
+
+	@Autowired
+	private IComentarioService comentarioService;
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
@@ -36,6 +43,11 @@ public class ForoControllerRestFul {
 	public ResponseEntity<ForoTO> consultarPorAsunto(@PathVariable String asunto) {
 		ForoTO foro = this.foroService.buscarPorAsunto(asunto);
 		return new ResponseEntity<>(foro, null, HttpStatus.OK);
+	}
+
+	@GetMapping(path = "/{asunto}/comentarios", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ComentarioTO>> consultarComentarios(@PathVariable String asunto) {
+		return new ResponseEntity<>(this.comentarioService.buscarPorForo(asunto), null, HttpStatus.OK);
 	}
 
 	@PutMapping(path = "/{asunto}", consumes = MediaType.APPLICATION_JSON_VALUE)

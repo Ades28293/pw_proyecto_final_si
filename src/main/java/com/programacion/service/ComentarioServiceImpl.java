@@ -2,6 +2,7 @@ package com.programacion.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,18 +36,20 @@ public class ComentarioServiceImpl implements IComentarioService {
 	}
 
 	@Override
-	public Comentario buscarPorId(Integer id) {
-		return this.comentarioRepository.consultarPorId(id);
+	public ComentarioTO buscarPorId(Integer id) {
+		return this.comentarioRepository.consultarPorId(id).convertir();
 	}
 
 	@Override
-	public List<Comentario> buscarPorForo(String asunto) {
-		return this.comentarioRepository.consultarPorForo(asunto);
+	public List<ComentarioTO> buscarPorForo(String asunto) {
+		return this.comentarioRepository.consultarPorForo(asunto).stream().map(c -> c.convertir())
+				.collect(Collectors.toList());
 	}
 
 	@Override
-	public List<Comentario> buscarPorEstudiante(String cedula) {
-		return this.comentarioRepository.consultarPorEstudiante(cedula);
+	public List<ComentarioTO> buscarPorEstudiante(String cedula) {
+		return this.comentarioRepository.consultarPorEstudiante(cedula).stream().map(c -> c.convertir())
+				.collect(Collectors.toList());
 	}
 
 	@Override

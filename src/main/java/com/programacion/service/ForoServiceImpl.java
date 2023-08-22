@@ -1,6 +1,8 @@
 package com.programacion.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,8 +41,6 @@ public class ForoServiceImpl implements IForoService {
 		f.setFecha(LocalDateTime.now());
 		f.setEstudiante(this.estudianteRepository.buscarPorCedula(foro.getCedulaEstudiante()));
 
-		// forma de setear los comentarios
-
 		this.foroRepository.actualizarForo(f);
 	}
 
@@ -52,6 +52,12 @@ public class ForoServiceImpl implements IForoService {
 	@Override
 	public ForoTO buscarPorId(Integer id) {
 		return this.foroRepository.buscarPorId(id).convertir();
+	}
+
+	@Override
+	public List<ForoTO> buscarPorCedula(String cedula) {
+		return this.foroRepository.buscarPorCedula(cedula).stream().map(f -> f.convertir())
+				.collect(Collectors.toList());
 	}
 
 }
