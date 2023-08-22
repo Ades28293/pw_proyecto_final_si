@@ -1,5 +1,7 @@
 package com.programacion.service;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ public class ForoServiceImpl implements IForoService {
 	@Override
 	public void nuevoForo(ForoTO foro) {
 		Foro f = foro.convertir();
+		f.setFecha(LocalDateTime.now());
 		f.setEstudiante(this.estudianteRepository.buscarPorCedula(foro.getCedulaEstudiante()));
 
 		this.foroRepository.crearForo(f);
@@ -33,6 +36,7 @@ public class ForoServiceImpl implements IForoService {
 	@Override
 	public void actualizarForo(ForoTO foro) {
 		Foro f = foro.convertir();
+		f.setFecha(LocalDateTime.now());
 		f.setEstudiante(this.estudianteRepository.buscarPorCedula(foro.getCedulaEstudiante()));
 
 		// forma de setear los comentarios

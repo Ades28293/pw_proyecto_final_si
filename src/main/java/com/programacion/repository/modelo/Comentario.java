@@ -64,6 +64,14 @@ public class Comentario {
 		this.descripcion = descripcion;
 	}
 
+	public LocalDateTime getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(LocalDateTime fecha) {
+		this.fecha = fecha;
+	}
+
 	public Estudiante getEstudiante() {
 		return estudiante;
 	}

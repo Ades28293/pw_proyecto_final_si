@@ -38,10 +38,12 @@ public class ForoControllerRestFul {
 		return new ResponseEntity<>(foro, null, HttpStatus.OK);
 	}
 
-	@PutMapping(path = "/{identificador}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(path = "/{asunto}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
-	public void actualizarForo(@RequestBody ForoTO foro, @PathVariable Integer identificador) {
-		foro.setId(identificador);
+	public void actualizarForo(@RequestBody ForoTO foro, @PathVariable String asunto) {
+		ForoTO f = this.foroService.buscarPorAsunto(asunto);
+		foro.setId(f.getId());
+		foro.setAsunto(asunto);
 		this.foroService.actualizarForo(foro);
 	}
 

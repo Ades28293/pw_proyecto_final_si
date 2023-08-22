@@ -1,5 +1,6 @@
 package com.programacion.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.programacion.repository.IComentarioRepository;
 import com.programacion.repository.IEstudianteRepository;
+import com.programacion.repository.IForoRepository;
 import com.programacion.repository.modelo.Comentario;
 import com.programacion.service.to.ComentarioTO;
 
@@ -17,11 +19,16 @@ public class ComentarioServiceImpl implements IComentarioService {
 	private IComentarioRepository comentarioRepository;
 
 	@Autowired
+	private IForoRepository foroRepository;
+
+	@Autowired
 	private IEstudianteRepository estudianteRepository;
 
 	@Override
 	public void agregarComentario(ComentarioTO comentario) {
 		Comentario c = comentario.convertir();
+		c.setFecha(LocalDateTime.now());
+		c.setForo(this.foroRepository.buscarForo(comentario.getAsuntoForo()));
 		c.setEstudiante(this.estudianteRepository.buscarPorCedula(comentario.getCedulaEstudiante()));
 
 		this.comentarioRepository.insertarComentario(c);
@@ -45,6 +52,8 @@ public class ComentarioServiceImpl implements IComentarioService {
 	@Override
 	public void editar(ComentarioTO comentario) {
 		Comentario c = comentario.convertir();
+		c.setFecha(LocalDateTime.now());
+		c.setForo(this.foroRepository.buscarForo(comentario.getAsuntoForo()));
 		c.setEstudiante(this.estudianteRepository.buscarPorCedula(comentario.getCedulaEstudiante()));
 
 		this.comentarioRepository.actualizar(c);

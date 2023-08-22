@@ -23,6 +23,7 @@ public class NoticiaTO extends RepresentationModel<NoticiaTO> implements Seriali
 		n.setTituloCorto(this.tituloCorto);
 		n.setTituloLargo(this.tituloLargo);
 		n.setDescripcion(this.descripcion);
+		n.setFecha(this.fecha);
 		return n;
 	}
 

@@ -1,5 +1,6 @@
 package com.programacion.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class NoticiaControllerRestful {
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public void guardar(@RequestBody NoticiaTO noticia) {
+		noticia.setFecha(LocalDateTime.now());
 		this.noticiaService.guardar(noticia);
 	}
 
@@ -45,6 +47,8 @@ public class NoticiaControllerRestful {
 	public void actualizar(@RequestBody NoticiaTO noticia, @PathVariable String tituloCorto) {
 		NoticiaTO noti = this.noticiaService.buscar(tituloCorto);
 		noticia.setId(noti.getId());
+		noticia.setTituloCorto(tituloCorto);
+		noticia.setFecha(LocalDateTime.now());
 		this.noticiaService.actualizar(noticia);
 	}
 
