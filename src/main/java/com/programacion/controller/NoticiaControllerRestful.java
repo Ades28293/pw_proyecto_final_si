@@ -1,0 +1,71 @@
+package com.programacion.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.programacion.service.INoticiaService;
+import com.programacion.service.to.NoticiaTO;
+
+@RestController
+@RequestMapping("/noticias")
+@CrossOrigin
+public class NoticiaControllerRestful {
+
+	@Autowired
+	private INoticiaService noticiaService;
+
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public void guardar(@RequestBody NoticiaTO noticia) {
+		this.noticiaService.guardar(noticia);
+	}
+
+	@GetMapping(path = "/{tituloCorto}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<NoticiaTO> buscar(@PathVariable String tituloCorto) {
+		return ResponseEntity.status(HttpStatus.OK).body(this.noticiaService.buscar(tituloCorto));
+	}
+
+	@PutMapping(path = "/{tituloCorto}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public void actualizar(@RequestBody NoticiaTO noticia, @PathVariable String tituloCorto) {
+		NoticiaTO noti = this.noticiaService.buscar(tituloCorto);
+		noti.setTituloLargo(noticia.getTituloLargo());
+		noti.setTituloCorto(noticia.getTituloCorto());
+		noti.setDescripcion(noticia.getDescripcion());
+		noti.setFecha(noticia.getFecha());
+		this.noticiaService.actualizar(noti);
+	}
+
+	@DeleteMapping(path = "{tituloCorto}")
+	@ResponseStatus(HttpStatus.OK)
+	public void borrar(@PathVariable String tituloCorto) {
+		this.noticiaService.borrar(tituloCorto);
+	}
+
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<NoticiaTO>> consultaPorCedulaEst(@RequestParam String cedula) {
+		return ResponseEntity.status(HttpStatus.OK).body(this.noticiaService.consultaPorCedulaEst(cedula));
+	}
+
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<NoticiaTO>> consultarTodos() {
+		return ResponseEntity.status(HttpStatus.OK).body(this.noticiaService.consultarTodos());
+
+	}
+
+}

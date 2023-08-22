@@ -1,9 +1,13 @@
 package com.programacion.service;
 
-import com.programacion.repository.modelo.Estudiante;
+import com.programacion.service.to.EstudianteTO;
 
 public interface IEstudianteService {
-	public Estudiante consultarPorCedula(String cedula);
 
-	public void guardar(Estudiante estudiante);
+	public void guardar(EstudianteTO estudiante);
+
+	public EstudianteTO consultarPorId(Integer id);
+
+	public EstudianteTO consultarPorCedula(String cedula);
+
 }

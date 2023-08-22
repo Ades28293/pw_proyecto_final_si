@@ -1,12 +1,16 @@
 package com.programacion.repository.modelo;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import com.programacion.service.to.EstudianteTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -31,6 +35,25 @@ public class Estudiante {
 
 	@Column(name = "estu_fecha_nacimiento")
 	private LocalDateTime fechaNacimiento;
+
+	@OneToMany(mappedBy = "estudiante")
+	private List<Noticia> noticias;
+
+	@OneToMany(mappedBy = "estudiante")
+	private List<Foro> foros;
+
+	@OneToMany(mappedBy = "estudiante")
+	private List<Comentario> comentarios;
+
+	public EstudianteTO convertir() {
+		EstudianteTO e = new EstudianteTO();
+		e.setId(this.id);
+		e.setCedula(this.cedula);
+		e.setNombre(this.nombre);
+		e.setApellido(this.apellido);
+		e.setFechaNacimiento(this.fechaNacimiento);
+		return e;
+	}
 
 	// GET & SET
 	public Integer getId() {
@@ -72,4 +95,29 @@ public class Estudiante {
 	public void setFechaNacimiento(LocalDateTime fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
+
+	public List<Noticia> getNoticias() {
+		return noticias;
+	}
+
+	public void setNoticias(List<Noticia> noticias) {
+		this.noticias = noticias;
+	}
+
+	public List<Foro> getForos() {
+		return foros;
+	}
+
+	public void setForos(List<Foro> foros) {
+		this.foros = foros;
+	}
+
+	public List<Comentario> getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(List<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}
+
 }
