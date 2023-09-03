@@ -1,5 +1,6 @@
 package com.programacion.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +35,7 @@ public class ComentarioControllerRestful {
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public void registrarComentario(@RequestBody ComentarioTO comentario) {
+		comentario.setFecha(LocalDateTime.now());
 		this.comentarioService.agregarComentario(comentario);
 	}
 

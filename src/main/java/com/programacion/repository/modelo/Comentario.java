@@ -24,7 +24,7 @@ public class Comentario {
 	@SequenceGenerator(name = "come_id_seq", sequenceName = "come_id_seq", allocationSize = 1)
 	private Integer id;
 
-	@Column(name = "come_descripcion")
+	@Column(name = "come_descripcion", columnDefinition = "text")
 	private String descripcion;
 
 	@Column(name = "come_fecha")
@@ -43,6 +43,7 @@ public class Comentario {
 		c.setId(this.id);
 		c.setDescripcion(this.descripcion);
 		c.setAsuntoForo(this.foro.getAsunto());
+		c.setFecha(this.fecha);
 		c.setCedulaEstudiante(this.estudiante.getCedula());
 		return c;
 	}
@@ -62,6 +63,14 @@ public class Comentario {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public LocalDateTime getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(LocalDateTime fecha) {
+		this.fecha = fecha;
 	}
 
 	public Estudiante getEstudiante() {

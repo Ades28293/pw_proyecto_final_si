@@ -1,5 +1,7 @@
 package com.programacion.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,6 +31,7 @@ public class ForoControllerRestFul {
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public void nuevoForo(@RequestBody ForoTO foro) {
+		foro.setFecha(LocalDateTime.now());
 		this.foroService.nuevoForo(foro);
 	}
 
