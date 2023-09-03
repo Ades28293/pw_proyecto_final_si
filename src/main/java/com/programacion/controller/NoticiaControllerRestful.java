@@ -1,5 +1,9 @@
 package com.programacion.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.programacion.service.INoticiaService;
 import com.programacion.service.to.NoticiaTO;
@@ -32,6 +37,7 @@ public class NoticiaControllerRestful {
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public void guardar(@RequestBody NoticiaTO noticia) {
+		
 		this.noticiaService.guardar(noticia);
 	}
 

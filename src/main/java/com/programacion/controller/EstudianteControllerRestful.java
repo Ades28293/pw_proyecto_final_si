@@ -18,7 +18,7 @@ import com.programacion.service.to.EstudianteTO;
 @RestController
 @RequestMapping("/estudiantes")
 @CrossOrigin
-public class EstudianteControllerRestFul {
+public class EstudianteControllerRestful {
 	@Autowired
 	private IEstudianteService estudianteService;
 
