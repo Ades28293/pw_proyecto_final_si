@@ -1,5 +1,8 @@
 package com.programacion.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +51,14 @@ public class ForoServiceImpl implements IForoService {
 	@Override
 	public ForoTO buscarPorId(Integer id) {
 		return this.foroRepository.buscarPorId(id).convertir();
+	}
+
+	@Override
+	public List<ForoTO> buscarForos() {
+		// TODO Auto-generated method stub
+		List<Foro>listaForo= this.foroRepository.buscarTodos();
+		List<ForoTO>listaFoTO=listaForo.stream().map(foro->foro.convertir()).collect(Collectors.toList());
+		return listaFoTO;
 	}
 
 }
