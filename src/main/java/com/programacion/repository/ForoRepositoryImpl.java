@@ -1,5 +1,7 @@
 package com.programacion.repository;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.programacion.repository.modelo.Foro;
@@ -44,6 +46,13 @@ public class ForoRepositoryImpl implements IForoRepository{
 	@Override
 	public Foro buscarPorId(Integer id) {
 		return this.entityManager.find(Foro.class, id);
+	}
+
+	@Override
+	public List<Foro> buscarTodos() {
+		// TODO Auto-generated method stub
+		TypedQuery<Foro>myQuery=this.entityManager.createQuery("SELECT f FROM Foro f", Foro.class);
+		return myQuery.getResultList();
 	}
 
 }

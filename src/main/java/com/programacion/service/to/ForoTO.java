@@ -65,5 +65,8 @@ public class ForoTO extends RepresentationModel<ForoTO> implements Serializable 
 	public void setCedulaEstudiante(String cedulaEstudiante) {
 		this.cedulaEstudiante = cedulaEstudiante;
 	}
-
+	
+	
+	
+	
 }

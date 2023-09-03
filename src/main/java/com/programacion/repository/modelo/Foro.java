@@ -1,7 +1,9 @@
 package com.programacion.repository.modelo;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.programacion.service.to.ForoTO;
 
@@ -51,6 +53,7 @@ public class Foro {
 		f.setCedulaEstudiante(this.estudiante.getCedula());
 		return f;
 	}
+	
 
 	// GET & SET
 	public Integer getId() {
@@ -99,6 +102,16 @@ public class Foro {
 
 	public void setEstudiante(Estudiante estudiante) {
 		this.estudiante = estudiante;
+	}
+
+
+	public LocalDateTime getFecha() {
+		return fecha;
+	}
+
+
+	public void setFecha(LocalDateTime fecha) {
+		this.fecha = fecha;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.programacion.controller;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,4 +55,8 @@ public class ForoControllerRestFul {
 		this.foroService.eliminarForo(id);
 	}
 
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ForoTO>> buscarForos() {
+		return ResponseEntity.status(HttpStatus.OK).body(this.foroService.buscarForos());
+	}
 }
