@@ -42,8 +42,9 @@ public class Comentario {
 		ComentarioTO c = new ComentarioTO();
 		c.setId(this.id);
 		c.setDescripcion(this.descripcion);
+		c.setFecha(this.fecha);
 		c.setAsuntoForo(this.foro.getAsunto());
-		c.setCedulaEstudiante(this.estudiante.getCedula());
+		c.setCedulaEstudiante(this.estudiante.getNombre());
 		return c;
 	}
 

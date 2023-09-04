@@ -54,4 +54,11 @@ public class ComentarioRepositoryImpl implements IComentarioRepository {
 		this.entityManager.remove(this.consultarPorId(id));
 	}
 
+	@Override
+	public List<Comentario> buscarTodos() {
+		TypedQuery<Comentario> query = this.entityManager.createQuery(
+				"SELECT c FROM Comentario c", Comentario.class);
+		return query.getResultList();
+	}
+
 }

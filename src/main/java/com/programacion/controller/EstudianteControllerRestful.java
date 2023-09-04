@@ -26,7 +26,6 @@ import com.programacion.service.to.NoticiaTO;
 @RequestMapping("/estudiantes")
 @CrossOrigin
 public class EstudianteControllerRestFul {
-
 	@Autowired
 	private IEstudianteService estudianteService;
 
@@ -56,5 +55,4 @@ public class EstudianteControllerRestFul {
 	public ResponseEntity<List<NoticiaTO>> consultarNoticias(@PathVariable String cedula) {
 		return ResponseEntity.status(HttpStatus.OK).body(this.noticiaService.consultaPorCedulaEst(cedula));
 	}
-
 }

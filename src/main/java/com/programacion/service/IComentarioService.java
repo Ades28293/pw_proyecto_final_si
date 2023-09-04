@@ -17,5 +17,8 @@ public interface IComentarioService {
 	public void editar(ComentarioTO comentario);
 
 	public void eliminar(Integer id);
+	
+	public List<ComentarioTO> buscarTodos();
+
 
 }

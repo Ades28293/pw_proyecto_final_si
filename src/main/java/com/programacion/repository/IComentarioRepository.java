@@ -17,5 +17,7 @@ public interface IComentarioRepository {
 	public void actualizar(Comentario comentario);
 
 	public void eliminar(Integer id);
+	
+	public List<Comentario> buscarTodos();
 
 }

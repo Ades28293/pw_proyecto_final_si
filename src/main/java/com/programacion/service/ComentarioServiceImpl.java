@@ -11,6 +11,7 @@ import com.programacion.repository.IComentarioRepository;
 import com.programacion.repository.IEstudianteRepository;
 import com.programacion.repository.IForoRepository;
 import com.programacion.repository.modelo.Comentario;
+import com.programacion.repository.modelo.Noticia;
 import com.programacion.service.to.ComentarioTO;
 
 @Service
@@ -65,6 +66,13 @@ public class ComentarioServiceImpl implements IComentarioService {
 	@Override
 	public void eliminar(Integer id) {
 		this.comentarioRepository.eliminar(id);
+	}
+
+	@Override
+	public List<ComentarioTO> buscarTodos() {
+
+		List<Comentario> lista = this.comentarioRepository.buscarTodos();
+		return lista.stream().map(c -> c.convertir()).collect(Collectors.toList());
 	}
 
 }

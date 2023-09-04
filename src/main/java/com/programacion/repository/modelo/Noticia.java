@@ -47,6 +47,7 @@ public class Noticia {
 		n.setTituloLargo(this.tituloLargo);
 		n.setDescripcion(this.descripcion);
 		n.setCedulaEstudiante(this.estudiante.getCedula());
+		n.setFecha(this.fecha);
 		return n;
 	}
 
