@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.programacion.repository.IComentarioRepository;
 import com.programacion.repository.IEstudianteRepository;
+import com.programacion.repository.IForoRepository;
 import com.programacion.repository.modelo.Comentario;
 import com.programacion.service.to.ComentarioTO;
 
@@ -19,10 +20,14 @@ public class ComentarioServiceImpl implements IComentarioService {
 	@Autowired
 	private IEstudianteRepository estudianteRepository;
 
+	@Autowired
+	private IForoRepository foroRepository;
+
 	@Override
 	public void agregarComentario(ComentarioTO comentario) {
 		Comentario c = comentario.convertir();
 		c.setEstudiante(this.estudianteRepository.buscarPorCedula(comentario.getCedulaEstudiante()));
+		c.setForo(this.foroRepository.buscarForo(comentario.getAsuntoForo()));
 
 		this.comentarioRepository.insertarComentario(c);
 	}
