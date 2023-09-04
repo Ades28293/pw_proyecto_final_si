@@ -1,5 +1,6 @@
 package com.programacion.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ public class ForoControllerRestFul {
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public void nuevoForo(@RequestBody ForoTO foro) {
+		foro.setFecha(LocalDateTime.now());
 		this.foroService.nuevoForo(foro);
 	}
 
@@ -65,4 +67,8 @@ public class ForoControllerRestFul {
 		this.foroService.eliminarForo(id);
 	}
 
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ForoTO>> buscarForos() {
+		return ResponseEntity.status(HttpStatus.OK).body(this.foroService.buscarForos());
+	}
 }

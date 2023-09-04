@@ -32,6 +32,7 @@ public class ComentarioServiceImpl implements IComentarioService {
 		c.setFecha(LocalDateTime.now());
 		c.setForo(this.foroRepository.buscarForo(comentario.getAsuntoForo()));
 		c.setEstudiante(this.estudianteRepository.buscarPorCedula(comentario.getCedulaEstudiante()));
+		c.setForo(this.foroRepository.buscarForo(comentario.getAsuntoForo()));
 
 		this.comentarioRepository.insertarComentario(c);
 	}

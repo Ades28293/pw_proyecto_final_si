@@ -16,6 +16,8 @@ public class NoticiaTO extends RepresentationModel<NoticiaTO> implements Seriali
 	private String descripcion;
 	private LocalDateTime fecha;
 	private String cedulaEstudiante;
+	private String urlImagen;
+	private String urlVideo;
 
 	public Noticia convertir() {
 		Noticia n = new Noticia();
@@ -24,6 +26,8 @@ public class NoticiaTO extends RepresentationModel<NoticiaTO> implements Seriali
 		n.setTituloLargo(this.tituloLargo);
 		n.setDescripcion(this.descripcion);
 		n.setFecha(this.fecha);
+		n.setUrlImagen(this.urlImagen);
+		n.setUrlVideo(this.urlVideo);
 		return n;
 	}
 
@@ -74,6 +78,22 @@ public class NoticiaTO extends RepresentationModel<NoticiaTO> implements Seriali
 
 	public void setCedulaEstudiante(String cedulaEstudiante) {
 		this.cedulaEstudiante = cedulaEstudiante;
+	}
+
+	public String getUrlImagen() {
+		return urlImagen;
+	}
+
+	public void setUrlImagen(String urlImagen) {
+		this.urlImagen = urlImagen;
+	}
+
+	public String getUrlVideo() {
+		return urlVideo;
+	}
+
+	public void setUrlVideo(String urlVideo) {
+		this.urlVideo = urlVideo;
 	}
 
 }

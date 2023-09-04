@@ -25,7 +25,7 @@ import com.programacion.service.to.NoticiaTO;
 @RestController
 @RequestMapping("/estudiantes")
 @CrossOrigin
-public class EstudianteControllerRestFul {
+public class EstudianteControllerRestful {
 	@Autowired
 	private IEstudianteService estudianteService;
 

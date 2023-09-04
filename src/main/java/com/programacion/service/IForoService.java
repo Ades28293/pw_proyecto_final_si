@@ -15,6 +15,8 @@ public interface IForoService {
 	public void actualizarForo(ForoTO foro);
 
 	public void eliminarForo(Integer id);
+	
+	public List<ForoTO> buscarForos();
 
 	public List<ForoTO> buscarPorCedula(String cedula);
 

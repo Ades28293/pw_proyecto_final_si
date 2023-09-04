@@ -29,7 +29,7 @@ public class Foro {
 	@Column(name = "foro_asunto")
 	private String asunto;
 
-	@Column(name = "foro_descripcion")
+	@Column(name = "foro_descripcion", columnDefinition = "text")
 	private String descripcion;
 
 	@Column(name = "foro_fecha")
@@ -47,9 +47,11 @@ public class Foro {
 		f.setId(this.id);
 		f.setAsunto(this.asunto);
 		f.setDescripcion(this.descripcion);
+		f.setFecha(this.fecha);
 		f.setCedulaEstudiante(this.estudiante.getCedula());
 		return f;
 	}
+	
 
 	// GET & SET
 	public Integer getId() {

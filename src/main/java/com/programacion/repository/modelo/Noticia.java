@@ -30,11 +30,17 @@ public class Noticia {
 	@Column(name = "noti_titulo_largo")
 	private String tituloLargo;
 
-	@Column(name = "noti_descripcion")
+	@Column(name = "noti_descripcion", columnDefinition = "text")
 	private String descripcion;
 
 	@Column(name = "noti_fecha")
 	private LocalDateTime fecha;
+
+	@Column(name = "noti_url_img", columnDefinition = "text")
+	private String urlImagen;
+
+	@Column(name = "noti_url_video", columnDefinition = "text")
+	private String urlVideo;
 
 	@ManyToOne
 	@JoinColumn(name = "noti_id_estu")
@@ -48,6 +54,8 @@ public class Noticia {
 		n.setDescripcion(this.descripcion);
 		n.setCedulaEstudiante(this.estudiante.getCedula());
 		n.setFecha(this.fecha);
+		n.setUrlImagen(this.urlImagen);
+		n.setUrlVideo(this.urlVideo);
 		return n;
 	}
 
@@ -98,6 +106,22 @@ public class Noticia {
 
 	public void setFecha(LocalDateTime fecha) {
 		this.fecha = fecha;
+	}
+
+	public String getUrlImagen() {
+		return urlImagen;
+	}
+
+	public void setUrlImagen(String urlImagen) {
+		this.urlImagen = urlImagen;
+	}
+
+	public String getUrlVideo() {
+		return urlVideo;
+	}
+
+	public void setUrlVideo(String urlVideo) {
+		this.urlVideo = urlVideo;
 	}
 
 }

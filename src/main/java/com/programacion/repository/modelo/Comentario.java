@@ -24,7 +24,7 @@ public class Comentario {
 	@SequenceGenerator(name = "come_id_seq", sequenceName = "come_id_seq", allocationSize = 1)
 	private Integer id;
 
-	@Column(name = "come_descripcion")
+	@Column(name = "come_descripcion", columnDefinition = "text")
 	private String descripcion;
 
 	@Column(name = "come_fecha")

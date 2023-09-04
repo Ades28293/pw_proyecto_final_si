@@ -18,4 +18,6 @@ public interface IForoRepository {
 
 	public List<Foro> buscarPorCedula(String cedula);
 
+	public List<Foro> buscarTodos();
+
 }

@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.programacion.service.INoticiaService;
 import com.programacion.service.to.NoticiaTO;
 
-
 @RestController
 @RequestMapping("/noticias")
 @CrossOrigin
@@ -68,28 +67,23 @@ public class NoticiaControllerRestful {
 		return ResponseEntity.status(HttpStatus.OK).body(this.noticiaService.consultaPorCedulaEst(cedula));
 	}
 
-	
 //	@GetMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
 //	public ResponseEntity<List<NoticiaTO>> consultarTodos() {
 //		return ResponseEntity.status(HttpStatus.OK).body(this.noticiaService.consultarTodos());
 //	}
-	
+
 	@GetMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<NoticiaTO>> consultarTodos() {
-		List<NoticiaTO> lista=this.noticiaService.consultarTodos();
-		for(NoticiaTO n : lista) {
-			Link myLink=linkTo(methodOn(NoticiaControllerRestful.class).buscar(n.getTituloCorto())).withSelfRel();
+		List<NoticiaTO> lista = this.noticiaService.consultarTodos();
+		for (NoticiaTO n : lista) {
+			Link myLink = linkTo(methodOn(NoticiaControllerRestful.class).buscar(n.getTituloCorto())).withSelfRel();
 			n.add(myLink);
 		}
-		
-		return new ResponseEntity<>(lista,null,HttpStatus.OK);
-		
-		//return ResponseEntity.status(HttpStatus.OK).body(this.noticiaService.consultarTodos());
-	}
-	
 
-	
-	
-	
+		return new ResponseEntity<>(lista, null, HttpStatus.OK);
+
+		// return
+		// ResponseEntity.status(HttpStatus.OK).body(this.noticiaService.consultarTodos());
+	}
 
 }

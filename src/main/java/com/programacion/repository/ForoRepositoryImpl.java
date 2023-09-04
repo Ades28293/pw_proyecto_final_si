@@ -55,4 +55,11 @@ public class ForoRepositoryImpl implements IForoRepository {
 		return query.getResultList();
 	}
 
+	@Override
+	public List<Foro> buscarTodos() {
+		// TODO Auto-generated method stub
+		TypedQuery<Foro> myQuery = this.entityManager.createQuery("SELECT f FROM Foro f", Foro.class);
+		return myQuery.getResultList();
+	}
+
 }

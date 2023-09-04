@@ -20,6 +20,7 @@ public class ComentarioTO extends RepresentationModel<ComentarioTO> implements S
 		Comentario c = new Comentario();
 		c.setId(this.id);
 		c.setDescripcion(this.descripcion);
+		c.setFecha(this.fecha);
 		return c;
 	}
 

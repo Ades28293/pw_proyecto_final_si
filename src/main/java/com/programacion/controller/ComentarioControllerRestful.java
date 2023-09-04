@@ -3,6 +3,7 @@ package com.programacion.controller;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class ComentarioControllerRestful {
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public void registrarComentario(@RequestBody ComentarioTO comentario) {
+		comentario.setFecha(LocalDateTime.now());
 		this.comentarioService.agregarComentario(comentario);
 	}
 
@@ -48,10 +50,23 @@ public class ComentarioControllerRestful {
 		return new ResponseEntity<>(comentarios, new HttpHeaders(), HttpStatus.OK);
 	}
 
-//	@GetMapping(path = "/{cedula}", produces = MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<List<ComentarioTO>> buscarPorEstudiante(@PathVariable String cedula) {
-//		
-//	}
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ComentarioTO>> consultarTodos() {
+		List<ComentarioTO> lista = this.comentarioService.buscarTodos();
+		for (ComentarioTO c : lista) {
+			Link myLink = linkTo(methodOn(ComentarioControllerRestful.class).buscarPorId(c.getId())).withSelfRel();
+			c.add(myLink);
+		}
+
+		return new ResponseEntity<>(lista, null, HttpStatus.OK);
+	}
+
+	@GetMapping(path = "/{id}/", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ComentarioTO> buscarPorId(@PathVariable Integer id) {
+		ComentarioTO comentario = this.comentarioService.buscarPorId(id);
+
+		return new ResponseEntity<>(comentario, null, HttpStatus.OK);
+	}
 
 	// PUT
 	@PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -66,26 +81,6 @@ public class ComentarioControllerRestful {
 	@ResponseStatus(HttpStatus.OK)
 	public void eliminar(@PathVariable Integer id) {
 		this.comentarioService.eliminar(id);
-	}
-	
-	@GetMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<ComentarioTO>> consultarTodos() {
-		List<ComentarioTO> lista=this.comentarioService.buscarTodos();
-		for(ComentarioTO c : lista) {
-			Link myLink=linkTo(methodOn(ComentarioControllerRestful.class).buscarPorId(c.getId())).withSelfRel();
-			c.add(myLink);
-		}
-		
-		return new ResponseEntity<>(lista,null,HttpStatus.OK);
-		
-		//return ResponseEntity.status(HttpStatus.OK).body(this.noticiaService.consultarTodos());
-	}
-	
-	@GetMapping(path = "/{id}/", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ComentarioTO> buscarPorId(@PathVariable Integer id) {
-		ComentarioTO comentario = this.comentarioService.buscarPorId(id);
-
-		return new ResponseEntity<>(comentario,null,HttpStatus.OK);
 	}
 
 }

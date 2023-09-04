@@ -60,4 +60,11 @@ public class ForoServiceImpl implements IForoService {
 				.collect(Collectors.toList());
 	}
 
+	public List<ForoTO> buscarForos() {
+		// TODO Auto-generated method stub
+		List<Foro> listaForo = this.foroRepository.buscarTodos();
+		List<ForoTO> listaFoTO = listaForo.stream().map(foro -> foro.convertir()).collect(Collectors.toList());
+		return listaFoTO;
+	}
+
 }
