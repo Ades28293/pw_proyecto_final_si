@@ -1,9 +1,13 @@
 package com.programacion.controller;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -69,6 +73,14 @@ public class ForoControllerRestFul {
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<ForoTO>> buscarForos() {
-		return ResponseEntity.status(HttpStatus.OK).body(this.foroService.buscarForos());
+		List<ForoTO> lista = this.foroService.buscarForos();
+		for (ForoTO n : lista) {
+			Link myLink = linkTo(
+					methodOn(EstudianteControllerRestful.class).consultarPorCedula(n.getCedulaEstudiante()))
+					.withRel("autor");
+
+			n.add(myLink);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(lista);
 	}
 }

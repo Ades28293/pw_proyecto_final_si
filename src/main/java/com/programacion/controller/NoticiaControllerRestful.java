@@ -77,7 +77,11 @@ public class NoticiaControllerRestful {
 		List<NoticiaTO> lista = this.noticiaService.consultarTodos();
 		for (NoticiaTO n : lista) {
 			Link myLink = linkTo(methodOn(NoticiaControllerRestful.class).buscar(n.getTituloCorto())).withSelfRel();
+			Link myLink2 = linkTo(
+					methodOn(EstudianteControllerRestful.class).consultarPorCedula(n.getCedulaEstudiante()))
+					.withRel("autor");
 			n.add(myLink);
+			n.add(myLink2);
 		}
 
 		return new ResponseEntity<>(lista, null, HttpStatus.OK);

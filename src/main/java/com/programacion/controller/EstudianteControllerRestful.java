@@ -1,8 +1,12 @@
 package com.programacion.controller;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -48,11 +52,27 @@ public class EstudianteControllerRestful {
 
 	@GetMapping(path = "/{cedula}/foros", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<ForoTO>> consultarForos(@PathVariable String cedula) {
-		return ResponseEntity.status(HttpStatus.OK).body(this.foroService.buscarPorCedula(cedula));
+		List<ForoTO> lista = this.foroService.buscarPorCedula(cedula);
+		for (ForoTO n : lista) {
+			Link myLink = linkTo(
+					methodOn(EstudianteControllerRestful.class).consultarPorCedula(n.getCedulaEstudiante()))
+					.withRel("autor");
+
+			n.add(myLink);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(lista);
 	}
 
 	@GetMapping(path = "/{cedula}/noticias", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<NoticiaTO>> consultarNoticias(@PathVariable String cedula) {
-		return ResponseEntity.status(HttpStatus.OK).body(this.noticiaService.consultaPorCedulaEst(cedula));
+		List<NoticiaTO> lista = this.noticiaService.consultaPorCedulaEst(cedula);
+		for (NoticiaTO n : lista) {
+			Link myLink = linkTo(
+					methodOn(EstudianteControllerRestful.class).consultarPorCedula(n.getCedulaEstudiante()))
+					.withRel("autor");
+
+			n.add(myLink);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(lista);
 	}
 }
