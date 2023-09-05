@@ -44,7 +44,7 @@ public class Comentario {
 		c.setDescripcion(this.descripcion);
 		c.setFecha(this.fecha);
 		c.setAsuntoForo(this.foro.getAsunto());
-		c.setCedulaEstudiante(this.estudiante.getNombre());
+		c.setCedulaEstudiante(this.estudiante.getCedula());
 		return c;
 	}
 
