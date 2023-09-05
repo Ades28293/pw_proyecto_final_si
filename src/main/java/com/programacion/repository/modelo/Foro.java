@@ -23,7 +23,7 @@ public class Foro {
 	@Id
 	@Column(name = "foro_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "foro_id_seq")
-	@SequenceGenerator(name = "foro_id_seq", sequenceName = "foro_id_seq", allocationSize = 1)
+	@SequenceGenerator(name = "foro_id_seq", sequenceName = "foro_id_seq", allocationSize = 1, initialValue = 6)
 	private Integer id;
 
 	@Column(name = "foro_asunto")

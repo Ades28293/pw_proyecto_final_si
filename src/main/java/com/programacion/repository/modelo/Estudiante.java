@@ -21,7 +21,7 @@ public class Estudiante {
 	@Id
 	@Column(name = "estu_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estu_id_seq")
-	@SequenceGenerator(name = "estu_id_seq", sequenceName = "estu_id_seq", allocationSize = 1)
+	@SequenceGenerator(name = "estu_id_seq", sequenceName = "estu_id_seq", allocationSize = 1, initialValue = 6)
 	private Integer id;
 
 	@Column(name = "estu_cedula")

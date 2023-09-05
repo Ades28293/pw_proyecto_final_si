@@ -21,7 +21,7 @@ public class Comentario {
 	@Id
 	@Column(name = "come_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "come_id_seq")
-	@SequenceGenerator(name = "come_id_seq", sequenceName = "come_id_seq", allocationSize = 1)
+	@SequenceGenerator(name = "come_id_seq", sequenceName = "come_id_seq", allocationSize = 1, initialValue = 11)
 	private Integer id;
 
 	@Column(name = "come_descripcion", columnDefinition = "text")
